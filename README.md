@@ -1,6 +1,6 @@
 # Dooh Mtaani Web Application
 
-#### This application was created as tool to help interested chama's in financial management, 2021
+#### This application was created as a tool to help interested chama's in financial management, 2021
 
 #### By **Finely M, Samuel W, Janet M, Issa S and Patrick M**
 
