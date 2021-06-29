@@ -31,7 +31,6 @@
   </head>
   <body>
     <div class="page-wrapper">
-      <!-- <div class="row"> -->
       <div class="side-bar">
         <div class="input-group mb-3">
           <input
@@ -71,7 +70,7 @@
             /></a>
           </div>
         </div>
-        <div class="middle-section_content">
+        <div class="middle-section__content">
           <div class="menu-bar">
             <ul>
               <li>Dashboard</li>
@@ -82,31 +81,126 @@
           </div>
           <div class="content">
             <div class="content__wrapper">
-              <p>Welcome John Doe,</p>
-              <p>
-                You are a visionary! By joining <strong><em>Dooh mtaani</em></strong>, you get an
-                opportunity to build your future by contributing both as a member
-                and or a leader of your chama.
-              </p>
-              <p>
-                <strong><em>Dooh mtaani</em></strong> gives a formal structure for your chama to
-                professionally manage member funds while efficiently tracking
-                individual member contributions.
-              </p>
-              <p>
-                You are currently not enrolled in any chama. To make full use of
-                <strong><em>Dooh mtaani</em></strong> you could;
-              </p>
-              <ul>
-                <li>Join an existing chama or</li>
-                <li>Create and invite members that share your vision.</li>
-              </ul>
-              <p>We look forward to being your partner...</p>
+              <div class="welcome hide-div">
+                <p>Welcome John Doe,</p>
+                <p>
+                  You are a visionary! By joining
+                  <strong><em>Dooh mtaani</em></strong
+                  >, you get an opportunity to build your future by contributing
+                  both as a member and or a leader of your chama.
+                </p>
+                <p>
+                  <strong><em>Dooh mtaani</em></strong> gives a formal structure
+                  for your chama to professionally manage member funds while
+                  efficiently tracking individual member contributions.
+                </p>
+                <p>
+                  You are currently not enrolled in any chama. To make full use
+                  of
+                  <strong><em>Dooh mtaani</em></strong> you could;
+                </p>
+                <ul>
+                  <li>Join an existing chama or</li>
+                  <li>Create and invite members that share your vision.</li>
+                </ul>
+                <p>We look forward to being your partner...</p>
+              </div>
+              <div class="settings-well hide-di">
+                <div class="settings-well-menu">
+                  <button class="btn-settings">General</button>
+                  <button class="btn-settings">Payment</button>
+                  <button class="btn-settings">Invite members</button>
+                </div>
+                <div class="settings-well-content">
+                  <div class="general-settings hide-div">
+                    <div class="sub-settings-header">
+                      <h6>Chama profile</h6>
+                    </div>
+                    <div class="sub-settings-content">
+                      <ul>
+                        <li>Name: <span>Jiwezeshe</span></li>
+                        <li>County: <span>Nairobi</span></li>
+                        <li>Town: <span>Ngara</span></li>
+                        <li>Nature: <span>Self-help</span></li>
+                        <li>Vision: <span>Financial inclusion</span></li>
+                        <li>Contribution frequency: <span>Weekly</span></li>
+                        <li>Amount: <span>200 ksh</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="payment-settings hide-div">
+                    <div class="sub-settings-header">
+                      <h6>Payment details</h6>
+                    </div>
+                    <div class="sub-settings-content info">
+                      <p>Make contributions to:</p>
+                      <p>Paybill#: <span>908709</span></p>
+                      <p>Account #: <span>"your phone number"</span></p>
+                    </div>
+                    <div class="sub-settings-content form hide-div">
+                      <form id="add-payment-details">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control financial-service-provider"
+                            placeholder="Financial service provider..."
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control account-number"
+                            placeholder="Account or paybill no..."
+                          />
+                        </div>
+                        <input
+                          type="hidden"
+                          class="form-action"
+                          value="add-payment-details"
+                        />
+                        <div class="form-group">
+                          <button type="submit" class="btn-submit">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="invite-settings hide-di">
+                    <div class="sub-settings-header">
+                      <h6>Invite members</h6>
+                    </div>
+                    <div class="sub-settings-content">
+                      <form action="" id="invite-members">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control member-phone-no"
+                            placeholder="Phone no..."
+                          />
+                        </div>
+                        <div class="form-group">
+                          <textarea
+                            class="form-control invite-text"
+                            rows="3"
+                            placeholder="Invite text..."
+                          ></textarea>
+                        </div>
+                        <input
+                          type="hidden"
+                          class="form-action"
+                          value="add-invite"
+                        />
+                        <div class="form-group">
+                          <button type="submit" class="btn-submit">Send invite</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- </div> -->
     </div>
   </body>
 </html>
