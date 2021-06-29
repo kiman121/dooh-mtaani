@@ -3,12 +3,48 @@
 *::after {
   box-sizing: border-box;
 }
-body {
-  margin: 0;
-  padding: 0;
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
-.side-bar ul {
-  list-style-type: none;
+body {
+  font-family: "Lato", sans-serif;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #053742;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  
+}
+.sidenav li {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ffff;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav li:hover {
+  color: #f11515;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.user-profile-pic img {
+  height: 50px;
+  border-radius: 50%;
+  float: right;
 }
 .status-bar {
   display: block;
@@ -16,29 +52,8 @@ body {
   background-color: #053742;
   float: left;
   padding: 0.25em;
-}
-.user-profile-pic {
-  border: 1px solid #053742;
-  width: fit-content;
-  background-color: #fff;
-  border-radius: 50%;
-  float: right;
-}
-.user-profile-pic img {
-  height: 50px;
-  border-radius: 50%;
-}
-.middle-section_content {
-  padding: 3.5em 0.75em;
-}
-.content{
-    background-color: #D6D2C4;
-    width: 100%;
-    height: 32em;
-}
-.content__wrapper{
-    max-width: 50%;
-    padding: 1em;
+  padding-top: 0em;
+  color: #ffff;
 }
 .menu-bar {
   display: block;
@@ -47,33 +62,28 @@ body {
   background-color: #A2DBFA;
   border-radius: 5px;
 }
-.menu-bar li {
-  margin: 0.5em;
-  display: inline-block;git 
-}
-.page-wrapper {
-  display: flex;
-}
-.side-bar {
-  width: 20%;
-  padding: 1em;
-  background-color: #053742;
-  /* border: 1px solid; */
-  color: #fff;
-  margin: 0;
-}
-.middle-section {
-  width: 80%;
-  /* border: 1px solid red; */
-}
 
-.side-bar,
-.middle-section {
-  height: 40em;
+.middle-section_content {
+  padding: 3.5em 0.75em;
 }
+.content{
+    background-color: #D6D2C4;
+    width: 100%;
+    height: 32em;
+    padding-top:3.5em 0.75em ;
+    border-radius: 5px;
 
+}
+.content__wrapper{
+    max-width: 50%;
+    padding: 1em;
+}
+h6{
+    color: antiquewhite;
+    font-size: large;
+}
 .btn-search {
   background-color: #e9ecef;
   border: 1px solid #ced4da;
-  /* border-radius:.25rem; */
+  border-radius:.55rem;
 }
