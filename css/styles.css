@@ -1,0 +1,79 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.side-bar ul {
+  list-style-type: none;
+}
+.status-bar {
+  display: block;
+  width: 100%;
+  background-color: #053742;
+  float: left;
+  padding: 0.25em;
+}
+.user-profile-pic {
+  border: 1px solid #053742;
+  width: fit-content;
+  background-color: #fff;
+  border-radius: 50%;
+  float: right;
+}
+.user-profile-pic img {
+  height: 50px;
+  border-radius: 50%;
+}
+.middle-section_content {
+  padding: 3.5em 0.75em;
+}
+.content{
+    background-color: #D6D2C4;
+    width: 100%;
+    height: 32em;
+}
+.content__wrapper{
+    max-width: 50%;
+    padding: 1em;
+}
+.menu-bar {
+  display: block;
+  width: 100%;
+  margin-top: 1em;
+  background-color: #A2DBFA;
+  border-radius: 5px;
+}
+.menu-bar li {
+  margin: 0.5em;
+  display: inline-block;git 
+}
+.page-wrapper {
+  display: flex;
+}
+.side-bar {
+  width: 20%;
+  padding: 1em;
+  background-color: #053742;
+  /* border: 1px solid; */
+  color: #fff;
+  margin: 0;
+}
+.middle-section {
+  width: 80%;
+  /* border: 1px solid red; */
+}
+
+.side-bar,
+.middle-section {
+  height: 40em;
+}
+
+.btn-search {
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  /* border-radius:.25rem; */
+}
