@@ -31,359 +31,399 @@
   </head>
 
   <body>
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search chama..." />
-        <div class="input-group-append">
-          <button class="btn btn-search" type="button">
-            <i class="fa fa-search"></i>
-          </button>
+    <div class="landingpage vh-100">
+      <div class="container-fluid">
+        <div class="background">
+          <!-- <div class="navbar">
+            <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+            <a href="#"><i class="fa fa-fw fa-search"></i> About</a> 
+            <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a> 
+            <a href="#"><i class="fa fa-fw fa-user"></i> Sign Up</a>
+          </div> -->
+
+          <div class="homepage text-center">
+            <h1>WELCOME TO DOOH-MTAANI</h1>
+            <p>Dooh Mtaani is your one-stop-shop for all things Chamas</p>
+            <p>
+              We provide you with a platform to create your own chama and add
+              members
+            </p>
+            <p>
+              You can also form a chama to collect contributions for cause such
+              as to help member with a personal issue such as a hospital bill
+            </p>
+
+            <button type="button" class="btn btn-outline-dark">sign up</button>
+
+            <button type="button" class="btn btn-outline-primary">
+              log in
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="available-chamas">
-        <h6>Available Chamas</h6>
-        <ul>
-          <li>#kesterspecial</li>
-          <li>#karoibangi-2013</li>
-          <li>#wazeewamtaa</li>
-          <li>#lorem234leo</li>
-          <li>#mscodinghustlers</li>
-        </ul>
-      </div>
-      <div class="Your-chamas">
-        <h6>Available Chamas</h6>
-        <ul>
-          <li>Yet to join a chama</li>
-        </ul>
       </div>
     </div>
 
-    <div id="main">
-      <div class="status-bar">
-        <div class="selected-chama"></div>
-        <div class="user-profile-pic">
-          <span style="font-size: 30px; cursor: pointer" onclick="openNav()"
-            >&#9776; CHAMA</span
-          >
-          <a href="#"><img src="images/profile.png" alt="profile picture" /></a>
+    <div class="main-content hide-div">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          >&times;</a
+        >
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search chama..."
+          />
+          <div class="input-group-append">
+            <button class="btn btn-search" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="available-chamas">
+          <h6>Available Chamas</h6>
+          <ul>
+            <li>#kesterspecial</li>
+            <li>#karoibangi-2013</li>
+            <li>#wazeewamtaa</li>
+            <li>#lorem234leo</li>
+            <li>#mscodinghustlers</li>
+          </ul>
+        </div>
+        <div class="Your-chamas">
+          <h6>Available Chamas</h6>
+          <ul>
+            <li>Yet to join a chama</li>
+          </ul>
         </div>
       </div>
-      <div class="middle-section_content">
-        <div class="menu-bar">
-          <button
-            data-link="welcome"
-            type="button"
-            class="btn btn-nav active welcome-link"
-          >
-            Welcome
-          </button>
-          <button
-            data-link="dashboard"
-            type="button"
-            class="btn btn-nav dashboard-link"
-          >
-            Dashboard
-          </button>
-          <button
-            data-link="new-chama"
-            type="button"
-            class="btn btn-nav new-chama-link"
-          >
-            New Chama
-          </button>
-          <button
-            data-link="contribute"
-            type="button"
-            class="btn btn-nav contribute-link"
-          >
-            Contribute
-          </button>
-          <button
-            data-link="settings"
-            type="button"
-            class="btn btn-nav settings-link"
-          >
-            Settings
-          </button>
+      <div id="main">
+        <div class="status-bar">
+          <div class="selected-chama"></div>
+          <div class="user-profile-pic">
+            <span style="font-size: 30px; cursor: pointer" onclick="openNav()"
+              >&#9776; CHAMA</span
+            >
+            <a href="#"
+              ><img src="images/profile.png" alt="profile picture"
+            /></a>
+          </div>
         </div>
-        <div class="content">
-          <div class="content__wrapper">
-            <div class="welcome">
-              <p>Welcome John Doe,</p>
-              <p>
-                You are a visionary! By joining
-                <strong><em>Dooh mtaani</em></strong
-                >, you get an opportunity to build your future by contributing
-                both as a member and or a leader of your chama.
-              </p>
-              <p>
-                <strong><em>Dooh mtaani</em></strong> gives a formal structure
-                for your chama to professionally manage member funds while
-                efficiently tracking individual member contributions.
-              </p>
-              <p>
-                You are currently not enrolled in any chama. To make full use of
-                <strong><em>Dooh mtaani</em></strong> you could;
-              </p>
-              <ul>
-                <li>Join an existing chama or</li>
-                <li>Create and invite members that share your vision.</li>
-              </ul>
-              <p>We look forward to being your partner...</p>
-            </div>
-            <div class="settings-well settings hide-div">
-              <div class="settings-well-menu">
-                <button data-link="general" class="btn-settings active">
-                  General
-                </button>
-                <button data-link="payments" class="btn-settings">
-                  Payment
-                </button>
-                <button data-link="invite" class="btn-settings">
-                  Invite members
-                </button>
+        <div class="middle-section_content">
+          <div class="menu-bar">
+            <button
+              data-link="welcome"
+              type="button"
+              class="btn btn-nav active welcome-link"
+            >
+              Welcome
+            </button>
+            <button
+              data-link="dashboard"
+              type="button"
+              class="btn btn-nav dashboard-link"
+            >
+              Dashboard
+            </button>
+            <button
+              data-link="new-chama"
+              type="button"
+              class="btn btn-nav new-chama-link"
+            >
+              New Chama
+            </button>
+            <button
+              data-link="contribute"
+              type="button"
+              class="btn btn-nav contribute-link"
+            >
+              Contribute
+            </button>
+            <button
+              data-link="settings"
+              type="button"
+              class="btn btn-nav settings-link"
+            >
+              Settings
+            </button>
+          </div>
+          <div class="content">
+            <div class="content__wrapper">
+              <div class="welcome">
+                <p>Welcome John Doe,</p>
+                <p>
+                  You are a visionary! By joining
+                  <strong><em>Dooh mtaani</em></strong
+                  >, you get an opportunity to build your future by contributing
+                  both as a member and or a leader of your chama.
+                </p>
+                <p>
+                  <strong><em>Dooh mtaani</em></strong> gives a formal structure
+                  for your chama to professionally manage member funds while
+                  efficiently tracking individual member contributions.
+                </p>
+                <p>
+                  You are currently not enrolled in any chama. To make full use
+                  of
+                  <strong><em>Dooh mtaani</em></strong> you could;
+                </p>
+                <ul>
+                  <li>Join an existing chama or</li>
+                  <li>Create and invite members that share your vision.</li>
+                </ul>
+                <p>We look forward to being your partner...</p>
               </div>
-              <div class="settings-well-content">
-                <div class="general general-settings">
-                  <div class="sub-settings-header">
-                    <h6>Chama profile</h6>
-                  </div>
-                  <div class="sub-settings-content">
-                    <!-- <ul>
-                      <li>Name: <span>Jiwezeshe</span></li>
-                      <li>County: <span>Nairobi</span></li>
-                      <li>Town: <span>Ngara</span></li>
-                      <li>Nature: <span>Self-help</span></li>
-                      <li>Vision: <span>Financial inclusion</span></li>
-                      <li>Contribution frequency: <span>Weekly</span></li>
-                      <li>Amount: <span>200 ksh</span></li>
-                    </ul> -->
-                  </div>
+              <div class="settings-well settings hide-div">
+                <div class="settings-well-menu">
+                  <button data-link="general" class="btn-settings active">
+                    General
+                  </button>
+                  <button data-link="payments" class="btn-settings">
+                    Payment
+                  </button>
+                  <button data-link="invite" class="btn-settings">
+                    Invite members
+                  </button>
                 </div>
-                <div class="payments payment-settings hide-div">
-                  <div class="sub-settings-header">
-                    <h6>Payment details</h6>
-                  </div>
-                  <div class="sub-settings-content info">
-                    <p>Make contributions to:</p>
-                    <p>Paybill#: <span>908709</span></p>
-                    <p>Account #: <span>"your phone number"</span></p>
-                  </div>
-                  <div class="sub-settings-content form hide-div">
-                    <form id="add-payment-details">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control financial-service-provider"
-                          placeholder="Financial service provider..."
-                        />
-                      </div>
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control account-number"
-                          placeholder="Account or paybill no..."
-                        />
-                      </div>
-                      <input
-                        type="hidden"
-                        class="form-action"
-                        value="add-payment-details"
-                      />
-                      <div class="form-group">
-                        <button type="submit" class="btn-submit">Save</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="invite invite-settings hide-div">
-                  <div class="sub-settings-header">
-                    <h6>Invite members</h6>
-                  </div>
-                  <div class="sub-settings-content">
-                    <form action="" id="invite-members">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control member-phone-no"
-                          placeholder="Phone no..."
-                        />
-                      </div>
-                      <div class="form-group">
-                        <textarea
-                          class="form-control invite-text"
-                          rows="3"
-                          placeholder="Invite text..."
-                        ></textarea>
-                      </div>
-                      <input
-                        type="hidden"
-                        class="form-action"
-                        value="add-invite"
-                      />
-                      <div class="form-group">
-                        <button type="submit" class="btn-submit">
-                          Send invite
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="dashboard hide-div">
-              <div class="dashboard-statistics">
-                <div class="own-contributions statistics">
-                  <p>50,000 ksh</p>
-                  <p>Your contribution</p>
-                  <a href="#">view statement</a>
-                </div>
-                <div class="number-of-member statistics">
-                  <p>324</p>
-                  <p>Member</p>
-                  <a href="#">view list</a>
-                </div>
-                <div class="number-of-member statistics">
-                  <p>300,000 ksh</p>
-                  <p>Contributions</p>
-                  <a href="#">view all member contributions</a>
-                </div>
-              </div>
-              <div class="table-lists">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="contribute hide-div">
-              <div class="contribute__container">
-                <p>Member Name: <span>John Doe</span></p>
-                <p>Phone no: <span>0719 000 000</span></p>
-                <p><span>Weekly contribution</span>: <span>200 ksh</span></p>
-                <button type="button">Push to mpesa</button>
-              </div>
-            </div>
-            <div class="new-chama hide-div">
-              <div class="new-chama__container">
-                <form action="" id="add-new-chama">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <select name="" class="form-control county">
-                          <option value="">Select county...</option>
-                          <option value="nairobi">Nairobi</option>
-                          <option value="mombasa">Mombasa</option>
-                          <option value="trans nzoia">Trans nzoia</option>
-                          <option value="laikipia">Laikipia</option>
-                        </select>
-                      </div>
+                <div class="settings-well-content">
+                  <div class="general general-settings">
+                    <div class="sub-settings-header">
+                      <h6>Chama profile</h6>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control town"
-                          placeholder="Enter town..."
-                        />
-                      </div>
+                    <div class="sub-settings-content">
+                      <!-- <ul>
+                        <li>Name: <span>Jiwezeshe</span></li>
+                        <li>County: <span>Nairobi</span></li>
+                        <li>Town: <span>Ngara</span></li>
+                        <li>Nature: <span>Self-help</span></li>
+                        <li>Vision: <span>Financial inclusion</span></li>
+                        <li>Contribution frequency: <span>Weekly</span></li>
+                        <li>Amount: <span>200 ksh</span></li>
+                      </ul> -->
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <select name="" class="form-control chama-type">
-                          <option value="">Choose type...</option>
-                          <option value="self-help">Self help</option>
-                          <option value="table banking">Table banking</option>
-                        </select>
-                      </div>
+                  <div class="payments payment-settings hide-div">
+                    <div class="sub-settings-header">
+                      <h6>Payment details</h6>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
+                    <div class="sub-settings-content info">
+                      <p>Make contributions to:</p>
+                      <p>Paybill#: <span>908709</span></p>
+                      <p>Account #: <span>"your phone number"</span></p>
+                    </div>
+                    <div class="sub-settings-content form hide-div">
+                      <form id="add-payment-details">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control financial-service-provider"
+                            placeholder="Financial service provider..."
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control account-number"
+                            placeholder="Account or paybill no..."
+                          />
+                        </div>
                         <input
-                          type="text"
-                          class="form-control chama-name"
-                          placeholder="Chama name..."
+                          type="hidden"
+                          class="form-action"
+                          value="add-payment-details"
                         />
-                      </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn-submit">Save</button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                  <!-- <div class="row">
-                    <div class="col-md"> -->
-                      <div class="form-group">
-                        <textarea
-                          class="form-control vision"
-                          rows="3"
-                          placeholder="Vision..."
-                        ></textarea>
+                  <div class="invite invite-settings hide-div">
+                    <div class="sub-settings-header">
+                      <h6>Invite members</h6>
+                    </div>
+                    <div class="sub-settings-content">
+                      <form action="" id="invite-members">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control member-phone-no"
+                            placeholder="Phone no..."
+                          />
+                        </div>
+                        <div class="form-group">
+                          <textarea
+                            class="form-control invite-text"
+                            rows="3"
+                            placeholder="Invite text..."
+                          ></textarea>
+                        </div>
+                        <input
+                          type="hidden"
+                          class="form-action"
+                          value="add-invite"
+                        />
+                        <div class="form-group">
+                          <button type="submit" class="btn-submit">
+                            Send invite
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="dashboard hide-div">
+                <div class="dashboard-statistics">
+                  <div class="own-contributions statistics">
+                    <p>50,000 ksh</p>
+                    <p>Your contribution</p>
+                    <a href="#">view statement</a>
+                  </div>
+                  <div class="number-of-member statistics">
+                    <p>324</p>
+                    <p>Member</p>
+                    <a href="#">view list</a>
+                  </div>
+                  <div class="number-of-member statistics">
+                    <p>300,000 ksh</p>
+                    <p>Contributions</p>
+                    <a href="#">view all member contributions</a>
+                  </div>
+                </div>
+                <div class="table-lists">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="contribute hide-div">
+                <div class="contribute__container">
+                  <p>Member Name: <span>John Doe</span></p>
+                  <p>Phone no: <span>0719 000 000</span></p>
+                  <p><span>Weekly contribution</span>: <span>200 ksh</span></p>
+                  <button type="button">Push to mpesa</button>
+                </div>
+              </div>
+              <div class="new-chama hide-div">
+                <div class="new-chama__container">
+                  <form action="" id="add-new-chama">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <select name="" class="form-control county">
+                            <option value="">Select county...</option>
+                            <option value="nairobi">Nairobi</option>
+                            <option value="mombasa">Mombasa</option>
+                            <option value="trans nzoia">Trans nzoia</option>
+                            <option value="laikipia">Laikipia</option>
+                          </select>
+                        </div>
                       </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control town"
+                            placeholder="Enter town..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <select name="" class="form-control chama-type">
+                            <option value="">Choose type...</option>
+                            <option value="self-help">Self help</option>
+                            <option value="table banking">Table banking</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control chama-name"
+                            placeholder="Chama name..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="row">
+                      <div class="col-md"> -->
+                    <div class="form-group">
+                      <textarea
+                        class="form-control vision"
+                        rows="3"
+                        placeholder="Vision..."
+                      ></textarea>
+                    </div>
                     <!-- </div>
-                  </div> -->
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <select
-                          name=""
-                          class="form-control contribution-frequency"
-                        >
-                          <option value="">Select frequency...</option>
-                          <option value="weekly">Weekly</option>
-                          <option value="monthly">Monthly</option>
-                          <option value="quarterly">Quarterly</option>
-                        </select>
+                    </div> -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <select
+                            name=""
+                            class="form-control contribution-frequency"
+                          >
+                            <option value="">Select frequency...</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control contribution-amount"
+                            placeholder="Contribution amount..."
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control contribution-amount"
-                          placeholder="Contribution amount..."
-                        />
-                      </div>
+                    <input
+                      type="hidden"
+                      class="form-action"
+                      value="add-new-chama"
+                    />
+                    <div class="form-group">
+                      <button type="submit" class="btn-submit">
+                        Create chama
+                      </button>
                     </div>
-                  </div>
-                  <input
-                    type="hidden"
-                    class="form-action"
-                    value="add-new-chama"
-                  />
-                  <div class="form-group">
-                    <button type="submit" class="btn-submit">
-                      Create chama
-                    </button>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

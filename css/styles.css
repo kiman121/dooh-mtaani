@@ -185,6 +185,67 @@ h6 {
     /* background-color: yellowgreen; */
 }
 /**********************
+  Landingpage
+ **********************/
+ .landingpage{
+  background-image:url(../images/micheile-henderson-ZVprbBmT8QA-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  /* margin-left: 0;
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+  background-repeat: no-repeat;
+}
+
+  .navbar {
+      width: 100%;
+      background-color: #555;
+      overflow: auto;
+      width: 90vw;
+    }
+    
+    .navbar a {
+      float: left;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    
+    .navbar a:hover {
+      background-color: #000;
+    }
+    
+    .active {
+      background-color: #04AA6D;
+    }
+    
+    @media screen and (max-width: 500px) {
+      .navbar a {
+        float: none;
+        display: block;
+      }
+
+
+  }
+
+  h1{
+text-align: center;
+margin: 30px auto;
+display: flex;
+justify-content: center;
+align-content: center;
+
+  }
+
+
+
+/**********************
   OTHERS
  **********************/
 .btn-settings {
