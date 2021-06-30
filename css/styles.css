@@ -152,43 +152,43 @@ h6 {
 /**********************
     DASHBOARD
 **********************/
-.dashboard{
-    display: block;
+.dashboard {
+  display: block;
 }
-.dashboard-statistics{
-    display: flex;
-    padding-left: 5em;
+.dashboard-statistics {
+  display: flex;
+  padding-left: 5em;
 }
-.statistics{
-    width: 25%;
-    text-align: center;
-    border: 1px solid;
-    border-radius: 1em;
-    padding: 0.85em;
-    margin-left: 1em;
+.statistics {
+  width: 25%;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 1em;
+  padding: 0.85em;
+  margin-left: 1em;
 }
-.statistics + .statistics{
-    margin-left: 2em;
+.statistics + .statistics {
+  margin-left: 2em;
 }
-.table-lists{
-    padding: 3em;
+.table-lists {
+  padding: 3em;
 }
 /**********************
   NEW CHAMA
  **********************/
-.new-chama{
-    display: block;
-    text-align: center;
+.new-chama {
+  display: block;
+  text-align: center;
 }
-.new-chama__container{
-    max-width: 60em;
-    /* background-color: yellowgreen; */
+.new-chama__container {
+  max-width: 60em;
+  /* background-color: yellowgreen; */
 }
 /**********************
   Landingpage
  **********************/
- .landingpage{
-  background-image:url(../images/micheile-henderson-ZVprbBmT8QA-unsplash.jpg);
+.landingpage {
+  background-image: url(../images/micheile-henderson-ZVprbBmT8QA-unsplash.jpg);
   background-position: center;
   background-size: cover;
   height: 100%;
@@ -202,48 +202,43 @@ h6 {
   background-repeat: no-repeat;
 }
 
-  .navbar {
-      width: 100%;
-      background-color: #555;
-      overflow: auto;
-      width: 90vw;
-    }
-    
-    .navbar a {
-      float: left;
-      padding: 12px;
-      color: white;
-      text-decoration: none;
-      font-size: 17px;
-    }
-    
-    .navbar a:hover {
-      background-color: #000;
-    }
-    
-    .active {
-      background-color: #04AA6D;
-    }
-    
-    @media screen and (max-width: 500px) {
-      .navbar a {
-        float: none;
-        display: block;
-      }
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+  width: 90vw;
+}
 
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
 
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #04aa6d;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
   }
+}
 
-  h1{
-text-align: center;
-margin: 30px auto;
-display: flex;
-justify-content: center;
-align-content: center;
-
-  }
-
-
+h1 {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
 
 /**********************
   OTHERS
@@ -267,7 +262,8 @@ align-content: center;
   background-color: #e9ecef;
   border: 1px solid #ced4da;
 }
-.hide-div, .hide-link {
+.hide-div,
+.hide-link {
   display: none;
 }
 @media screen and (min-width: 768px) {
@@ -278,4 +274,20 @@ align-content: center;
   .settings-well-content {
     height: 30em;
   }
+}
+input {
+  opacity: 0.5;
+  color: #fff;
+}
+#signup,
+#login {
+  display: none;
+}
+
+.homepage {
+  padding: 10%;
+  font-weight: bolder;
+}
+h5 {
+  color: #f11515;
 }

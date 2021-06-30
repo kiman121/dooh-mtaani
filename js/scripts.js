@@ -276,6 +276,15 @@ function resetGeneralSettings(
         amount +
         " ksh</span></li> </ul>"
     );
+<<<<<<< HEAD
+=======
+  //
+}
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+>>>>>>> 7e226e8586fcd453da5979132185ebc6120c9419
 }
 function resetPaymentDetailsSettings(paymentDetails) {
   if ($.isEmptyObject(paymentDetails)) {
@@ -289,3 +298,72 @@ function resetPaymentDetailsSettings(paymentDetails) {
 function setChamaStatus(selectedChamaName, selectedChamaId){
     $(".status-bar").find(".selected-chama").data("selectedChamaId");
 }
+
+$(document).ready(function () {
+  $("#signup-btn").click(function () {
+    $("#signup").show();
+    $("#login").hide();
+  });
+  $("#login-btn").click(function () {
+    $("#login").show();
+    $("#signup").hide();
+  });
+  $("#submit-btn").click(function (event) {
+    event.preventDefault();
+
+    var firstname = $("input#firstname").val();
+    var lastname = $("input#lastname").val();
+    var phonenumber = $("input#phonenumber").val();
+    var email = $("input#email").val();
+    var numberid = $("input#numid").val();
+    var username = $("input#username").val();
+    var password = $("input#newpass").val();
+    var pass = $("input#conpass").val();
+    console.log(
+      firstname,
+      lastname,
+      phonenumber,
+      email,
+      numberid,
+      username,
+      password,
+      pass
+    );
+    if (
+      firstname == "" ||
+      lastname == "" ||
+      phonenumber == "" ||
+      email == "" ||
+      numberid == "" ||
+      username == "" ||
+      password == "" ||
+      pass == ""
+    ) {
+      $("h5#errorfirstname").append(
+        " ERROR!!please complete filling in the form"
+      );
+    } else {
+      $("#maincontent").show();
+      $("#landingpage").hide();
+    }
+  });
+  $("#loginbtn").click(function (event) {
+    event.preventDefault();
+    var usnumber = $("input#usnum").val();
+    var pswd = $("input#pwd").val();
+
+    console.log(usnumber, pswd);
+
+    if (usnumber == "" || pswd == "") {
+      $("h5#errorfirstname").append(
+        " ERROR!!please complete filling in the form"
+      );
+    } else {
+      $("#maincontent").show();
+      $("#landingpage").hide();
+    }
+  });
+});
+
+// var firstname =document.getElementById("firstname").value();
+// console.log(firstname)
