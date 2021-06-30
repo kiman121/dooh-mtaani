@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var userStatus = "";
+  var chamaId = 1;
   resetNavBar();
 
   /*===== Form submissions======*/
@@ -15,6 +15,7 @@ $(document).ready(function () {
       vision = $(".vision").val();
 
     const newChama = new Chama(
+      chamaId,
       county,
       town,
       frequency,
@@ -23,7 +24,7 @@ $(document).ready(function () {
       type,
       vision
     );
-    
+
     // add member ===
     var title = newUser.name.title,
       fullName =
@@ -45,18 +46,39 @@ $(document).ready(function () {
       idNumber,
       emailAddress
     );
-    
+
     newChama.members.push(newMember);
-    
+
     newUser.chamas.push(newChama);
-    
+
     resetHtmlContent();
     resetNavBar();
     navigate("settings");
+    chamaId++;
+    console.log(newUser);
+  });
+  // 2) Add payment details
+  $("form#add-payment-details").submit(function (event) {
+    event.preventDefault();
+    var selectedChamaID = $(".status-bar")
+        .find(".selected-chama")
+        .data(chamaid),
+      chamas = newUser.chamas;
+    (financialServiceProvider = $(".financial-service-provider").val()),
+      (accountNumber = $(".account-number").val()),
+      (chamaPaymentDetails = {
+        financialServiceProvider: financialServiceProvider,
+        accountNumber: accountNumber,
+      });
+
+    chamas.forEach(function (chama) {
+      if ((chama.chamaId = selectedChamaID)) {
+        chama.paymentDetails.push(chamaPaymentDetails);
+      }
+    });
 
     console.log(newUser);
   });
-
   /*===== Other events ======*/
   $(".btn-nav").click(function (event) {
     event.preventDefault();
@@ -122,12 +144,23 @@ function User(
   this.email = emailAddress;
   this.chamas = [];
 }
-function Chama(county, town, frequency, amount, chamaName, type, vision) {
+function Chama(
+  chamaId,
+  county,
+  town,
+  frequency,
+  amount,
+  chamaName,
+  type,
+  vision
+) {
+  this.chamaId = chamaId;
   this.description = { chamaName: chamaName, type: type, vision: vision };
   this.address = { county: county, town: town };
   this.contributions = { frequency: frequency, amount: amount };
   this.members = [];
   this.transactions = [];
+  this.paymentDetails = {};
 }
 function Member(title, fullName, gender, phoneNumber, idNumber, emailAddress) {
   this.registrationDate = "";
@@ -165,40 +198,39 @@ function resetHtmlContent() {
   // Settings
   // General settings
   var chamas = newUser.chamas,
+    chamaName = "",
     county = "",
     town = "",
     nature = "",
     vision = "",
     frequency = "",
-    amount = 0;
+    amount = 0,
+    paymentDetails = {};
 
   chamas.forEach(function (chama) {
+    chamaName = chama.description.chamaName;
     county = chama.address.county;
     town = chama.address.town;
     nature = chama.description.type;
     vision = chama.description.vision;
     frequency = chama.contributions.frequency;
     amount = formatCurrency(parseInt(chama.contributions.amount));
+    paymentDetails = chama.paymentDetails;
   });
-
-  $(".general-settings .sub-settings-content")
-    .empty()
-    .html(
-      "<ul> <li>Name: <span>Jiwezeshe</span></li> <li>County: <span>" +
-        county +
-        "</span></li> <li>Town: <span>" +
-        town +
-        "</span></li> <li>Nature: <span>" +
-        nature +
-        "</span></li> <li>Vision: <span>" +
-        vision +
-        "</span></li> <li>Contribution frequency: <span>" +
-        frequency +
-        "</span></li> <li>Amount: <span>" +
-        amount +
-        " ksh</span></li> </ul>"
-    );
-    // 
+  // set chama name and id
+  
+  // General settings
+  resetGeneralSettings(
+    chamaName,
+    county,
+    town,
+    nature,
+    vision,
+    frequency,
+    amount
+  );
+  // Payment details
+  resetPaymentDetailsSettings(paymentDetails);
 }
 
 function openNav() {
@@ -215,4 +247,45 @@ function formatCurrency(amount) {
     .toFixed(2)
     .replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
     .toString();
+}
+function resetGeneralSettings(
+  chamaName,
+  county,
+  town,
+  nature,
+  vision,
+  frequency,
+  amount
+) {
+  $(".general-settings .sub-settings-content")
+    .empty()
+    .html(
+      "<ul> <li>Name: <span>" +
+        chamaName +
+        "</span></li> <li>County: <span>" +
+        county +
+        "</span></li> <li>Town: <span>" +
+        town +
+        "</span></li> <li>Nature: <span>" +
+        nature +
+        "</span></li> <li>Vision: <span>" +
+        vision +
+        "</span></li> <li>Contribution frequency: <span>" +
+        frequency +
+        "</span></li> <li>Amount: <span>" +
+        amount +
+        " ksh</span></li> </ul>"
+    );
+}
+function resetPaymentDetailsSettings(paymentDetails) {
+  if ($.isEmptyObject(paymentDetails)) {
+    $(".sub-settings-content.info").addClass("hide-div");
+    $(".sub-settings-content.form").removeClass("hide-div");
+  } else {
+    $(".sub-settings-content .info").removeClass("hide-div");
+    $(".sub-settings-content .form").addClass("hide-div");
+  }
+}
+function setChamaStatus(selectedChamaName, selectedChamaId){
+    $(".status-bar").find(".selected-chama").data("selectedChamaId");
 }
