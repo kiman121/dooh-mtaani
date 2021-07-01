@@ -1,4 +1,4 @@
-const newUser = new User();
+const newUser = new User(), newSystemUsers = new SystemUsers();
 $(document).ready(function () {
   var chamaId = 1;
   /*===== Form submissions======*/
@@ -107,13 +107,19 @@ $(document).ready(function () {
         (newUser.email = $(".email").val()),
         (newUser.nationalId = $(".id-number").val()),
         (newUser.password = $(".password").val());
+      // Add login functionality
+      // $(".landingpage").addClass("hide-div");
+      // $(".main-content").removeClass("hide-div");
+
+      usersDetails = {
+        email: newUser.email,
+        password: newUser.password
+      }
+
+      newSystemUsers.users.push(usersDetails);
+      console.log(newSystemUsers);
+      // resetHtmlContent();
     }
-
-    // Add login functionality
-    $(".landingpage").addClass("hide-div");
-    $(".main-content").removeClass("hide-div");
-
-    resetHtmlContent();
   });
   /*===== Other events ======*/
   $(".btn-nav").click(function (event) {
@@ -201,6 +207,9 @@ function Member(title, fullName, gender, phoneNumber, idNumber, emailAddress) {
   this.phoneNumber = phoneNumber;
   this.nationalId = idNumber;
   this.email = emailAddress;
+}
+function SystemUsers(){
+  this.users = []
 }
 /*==============
  PROTOTYPES
