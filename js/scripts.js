@@ -461,3 +461,11 @@ function resetContribute(fullName, phoneNumber, frequency, amount) {
 
 // var firstname =document.getElementById("firstname").value();
 // console.log(firstname)
+
+
+
+var loadFile = function (event) {
+  var image = document.getElementById("output");
+
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
