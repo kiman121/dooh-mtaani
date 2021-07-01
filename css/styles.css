@@ -270,7 +270,8 @@ h1 {
   border: 1px solid #ced4da;
 }
 .hide-div,
-.hide-link {
+.hide-link,
+.hide-alert {
   display: none;
 }
 @media screen and (min-width: 768px) {
@@ -299,5 +300,5 @@ h5 {
   color: #f11515;
 }
 .validate {
-  border: 1px solid red;
+  border: 2px solid red;
 }

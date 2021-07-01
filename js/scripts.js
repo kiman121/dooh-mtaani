@@ -1,62 +1,90 @@
-const newUser = new User(), newSystemUsers = new SystemUsers();
+const newUser = new User(),
+  newSystemUsers = new SystemUsers();
 $(document).ready(function () {
-  var chamaId = 1;
+  var chamaID = 1;
   /*===== Form submissions======*/
   // 1) Add chama
   $("form#add-new-chama").submit(function (event) {
     event.preventDefault();
-    var county = $(".county").val(),
-      town = $(".town").val(),
-      frequency = $(".contribution-frequency").val(),
-      amount = $(".contribution-amount").val(),
-      chamaName = $(".chama-name").val(),
-      type = $(".chama-type").val(),
-      vision = $(".vision").val();
 
-    const newChama = new Chama(
-      chamaId,
-      county,
-      town,
-      frequency,
-      amount,
-      chamaName,
-      type,
-      vision
-    );
+    var fieldsToValidates = [
+        "county",
+        "town",
+        "contribution-frequency",
+        "contribution-amount",
+        "chama-name",
+        "chama-type",
+        "vision",
+      ],
+      result = validateUserInput(fieldsToValidates, "new-chama-form-alerts");
 
-    var title = newUser.name.title,
-      fullName =
-        newUser.name.first +
-        " " +
-        newUser.name.middle +
-        " " +
-        newUser.name.last,
-      gender = newUser.gender,
-      phoneNumber = newUser.phoneNumber,
-      idNumber = newUser.nationalId,
-      emailAddress = newUser.email;
+    if (result) {
+      var county = $(".county").val(),
+        town = $(".town").val(),
+        frequency = $(".contribution-frequency").val(),
+        amount = $(".contribution-amount").val(),
+        chamaName = $(".chama-name").val(),
+        type = $(".chama-type").val(),
+        vision = $(".vision").val(),
+        selectedUserStatus = userStatus();
+      // userStatus = userStatus();
+      // console.log(userStatus());
 
-    const newMember = new Member(
-      title,
-      fullName,
-      gender,
-      phoneNumber,
-      idNumber,
-      emailAddress
-    );
+      console.log(chamaID);
 
-    newChama.members.push(newMember);
+      const newChama = new Chama(
+        chamaID,
+        county,
+        town,
+        frequency,
+        amount,
+        chamaName,
+        type,
+        vision
+      );
+        
+      // console.log(userStatus());
+      var title = newUser.name.title,
+        fullName =
+          newUser.name.first +
+          " " +
+          newUser.name.middle +
+          " " +
+          newUser.name.last,
+        gender = newUser.gender,
+        phoneNumber = newUser.phoneNumber,
+        idNumber = newUser.nationalId,
+        emailAddress = newUser.email;
 
-    newUser.chamas.push(newChama);
+      const newMember = new Member(
+        title,
+        fullName,
+        gender,
+        phoneNumber,
+        idNumber,
+        emailAddress
+      );
 
-    if (userStatus()) {
-      setChamaStatus(chamaId, chamaName);
+      newChama.members.push(newMember);
+
+      newUser.chamas.push(newChama);
+      console.log(newUser);
+      // console.log(userStatus(),chamaId, chamaName);
+
+      // console.log(userStatus());
+      if (!selectedUserStatus) {
+        setChamaStatus(chamaID, chamaName);
+        navigate("settings");
+      } else {
+        navigate("dashboard");
+      }
+      resetHtmlContent(selectedUserStatus, chamaID);
+      // resetNavBar(userStatus());
+      console.log(chamaID);
+      console.log();
+      resetFormFields(fieldsToValidates);
+      chamaID++;
     }
-    resetHtmlContent();
-    // resetNavBar(userStatus());
-    navigate("settings");
-
-    chamaId++;
   });
   // 2) Add payment details
   $("form#add-payment-details").submit(function (event) {
@@ -71,7 +99,7 @@ $(document).ready(function () {
         financialServiceProvider: financialServiceProvider,
         accountNumber: accountNumber,
       };
-
+    console.log(selectedChamaID);
     chamas.forEach(function (chama) {
       if ((chama.description.chamaId = selectedChamaID)) {
         chama.paymentDetails = chamaPaymentDetails;
@@ -95,30 +123,70 @@ $(document).ready(function () {
       "email",
       "password",
     ];
-    var result = validateUserInput(fieldsToValidates);
-
+    var result = validateUserInput(fieldsToValidates, "sign-up-form-alerts");
+    const sigupUser = new User();
     if (result) {
-      (newUser.name.title = $(".title").val()),
-        (newUser.name.first = $(".firstname").val()),
-        (newUser.name.last = $(".lastname").val()),
-        (newUser.name.middle = $(".middlename").val()),
-        (newUser.gender = $(".gender").val()),
-        (newUser.phoneNumber = $(".phonenumber").val()),
-        (newUser.email = $(".email").val()),
-        (newUser.nationalId = $(".id-number").val()),
-        (newUser.password = $(".password").val());
+      (sigupUser.name.title = $(".title").val()),
+        (sigupUser.name.first = $(".firstname").val()),
+        (sigupUser.name.last = $(".lastname").val()),
+        (sigupUser.name.middle = $(".middlename").val()),
+        (sigupUser.gender = $(".gender").val()),
+        (sigupUser.phoneNumber = $(".phonenumber").val()),
+        (sigupUser.email = $(".email").val()),
+        (sigupUser.nationalId = $(".id-number").val()),
+        (sigupUser.password = $(".password").val());
       // Add login functionality
-      // $(".landingpage").addClass("hide-div");
-      // $(".main-content").removeClass("hide-div");
 
-      usersDetails = {
-        email: newUser.email,
-        password: newUser.password
-      }
+      newSystemUsers.users.push(sigupUser);
 
-      newSystemUsers.users.push(usersDetails);
+      resetFormFields(fieldsToValidates);
+      alertUser(
+        "You have successfully signed up! Kindly proceed to the login.",
+        "sign-up-form-alerts",
+        "alert-success"
+      );
+      // $(".sign-up-form-alerts").empty().html(;
+      // $(".sign-up-form-alerts").removeClass("hide-alert").addClass("alert-success");
+
+      $(".sign-up").addClass("hide-div");
       console.log(newSystemUsers);
       // resetHtmlContent();
+    }
+  });
+  // 4) Login
+  $("form#login").submit(function (event) {
+    event.preventDefault();
+    var userEmail = $(".user-eamil").val(),
+      userPassword = $(".user-password").val(),
+      fieldsToValidates = ["user-eamil", "user-password"];
+
+    var result = validateUserInput(fieldsToValidates, "sign-up-form-alerts");
+
+    if (result) {
+      var users = newSystemUsers.users;
+      users.forEach(function (user) {
+        if (user.email === userEmail && user.password === userPassword) {
+          $(".landingpage").addClass("hide-div");
+          $(".main-content").removeClass("hide-div");
+
+          newUser.name.title = user.name.title;
+          newUser.name.first = user.name.first;
+          newUser.name.last = user.name.last;
+          newUser.name.middle = user.name.middle;
+          newUser.gender = user.gender;
+          newUser.phoneNumber = user.phoneNumber;
+          newUser.email = user.email;
+          newUser.nationalId = user.nationalId;
+          newUser.password = user.password;
+          resetHtmlContent();
+        } else {
+          alertUser(
+            "Your email or password is incorrect!!!",
+            "sign-up-form-alerts",
+            "alert-danger"
+          );
+        }
+      });
     }
   });
   /*===== Other events ======*/
@@ -208,8 +276,8 @@ function Member(title, fullName, gender, phoneNumber, idNumber, emailAddress) {
   this.nationalId = idNumber;
   this.email = emailAddress;
 }
-function SystemUsers(){
-  this.users = []
+function SystemUsers() {
+  this.users = [];
 }
 /*==============
  PROTOTYPES
@@ -246,12 +314,12 @@ function navigate(toLink) {
   var activeNavLink = $(".menu-bar").find(".active").data("link");
 
   $(".menu-bar").find(".active").removeClass("active");
-  $(".settings-link").addClass("active");
+  $("." + toLink + "-link").addClass("active");
 
   $("." + activeNavLink).addClass("hide-div");
   $("." + toLink).removeClass("hide-div");
 }
-function resetHtmlContent() {
+function resetHtmlContent(selectedUserStatus = true, chamaId = "") {
   var selectedChamaID = $(".status-bar")
       .find(".selected-chama-details")
       .data("selectedchamaid"),
@@ -283,24 +351,28 @@ function resetHtmlContent() {
   });
   // Nav bar
   resetNavBar(userStatus());
-  // General settings
-  resetGeneralSettings(
-    chamaName,
-    county,
-    town,
-    nature,
-    vision,
-    frequency,
-    amount
-  );
+  // Resets for a new user
+  if (!selectedUserStatus) {
+    resetGeneralSettings(
+      chamaName,
+      county,
+      town,
+      nature,
+      vision,
+      frequency,
+      amount
+    );
+  }
+
   // Payment details
   resetPaymentDetailsSettings(paymentDetails);
   // Reset welcome message
   resetWelcomeMessage(title, firstname, fullName);
   // Reset contribute
   resetContribute(fullName, phoneNumber, frequency, amount);
+  // Reset registered chamas
+  resetRegisteredChamas(userStatus(), chamas);
 }
-
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
@@ -365,8 +437,9 @@ function setChamaStatus(chamaId, chamaName) {
     selectedchamaid: chamaId,
     selectedchamaname: chamaName,
   });
+  $(".selected-chama-details").empty().html(chamaName);
 }
-function validateUserInput(fieldsToValidates) {
+function validateUserInput(fieldsToValidates, alertDivClass) {
   $(".validate").removeClass("validate");
   var status = true;
 
@@ -380,7 +453,9 @@ function validateUserInput(fieldsToValidates) {
       status = false;
     }
   });
-
+  if (!status) {
+    alertUser("Fill in the missing details!", alertDivClass, "alert-danger");
+  }
   return status;
 }
 function resetWelcomeMessage(title, first, fullName) {
@@ -402,77 +477,41 @@ function resetContribute(fullName, phoneNumber, frequency, amount) {
         '</span> ksh</p> <button type="button">Push to mpesa</button>'
     );
 }
-// $(document).ready(function () {
-//   $("#signup-btn").click(function () {
-//     $("#signup").show();
-//     $("#login").hide();
-//   });
-//   $("#login-btn").click(function () {
-//     $("#login").show();
-//     $("#signup").hide();
-//   });
-//   $("#submit-btn").click(function (event) {
-//     event.preventDefault();
+function resetFormFields(fieldsToValidates) {
+  fieldsToValidates.forEach(function (fieldsToValidate) {
+    $("." + fieldsToValidate).val("");
+  });
+}
+function alertUser(message, alertDivClass, alertClass) {
+  $("." + alertDivClass).html(message);
+  $("." + alertDivClass)
+    .removeClass("hide-alert")
+    .addClass(alertClass);
 
-//     var firstname = $("input#firstname").val();
-//     var lastname = $("input#lastname").val();
-//     var phonenumber = $("input#phonenumber").val();
-//     var email = $("input#email").val();
-//     var numberid = $("input#numid").val();
-//     var username = $("input#username").val();
-//     var password = $("input#newpass").val();
-//     var pass = $("input#conpass").val();
-//     console.log(
-//       firstname,
-//       lastname,
-//       phonenumber,
-//       email,
-//       numberid,
-//       username,
-//       password,
-//       pass
-//     );
-//     if (
-//       firstname == "" ||
-//       lastname == "" ||
-//       phonenumber == "" ||
-//       email == "" ||
-//       numberid == "" ||
-//       username == "" ||
-//       password == "" ||
-//       pass == ""
-//     ) {
-//       $("h5#errorfirstname").append(
-//         " ERROR!!please complete filling in the form"
-//       );
-//     } else {
-//       $("#maincontent").show();
-//       $("#landingpage").hide();
-//     }
-//   });
-//   $("#loginbtn").click(function (event) {
-//     event.preventDefault();
-//     var usnumber = $("input#usnum").val();
-//     var pswd = $("input#pwd").val();
-
-//     console.log(usnumber, pswd);
-
-//     if (usnumber == "" || pswd == "") {
-//       $("h5#errorfirstname").append(
-//         " ERROR!!please complete filling in the form"
-//       );
-//     } else {
-//       $("#maincontent").show();
-//       $("#landingpage").hide();
-//     }
-//   });
-// });
-
-// var firstname =document.getElementById("firstname").value();
-// console.log(firstname)
-
-
-
+  setTimeout(() => {
+    $("." + alertDivClass).empty();
+    $("." + alertDivClass)
+      .removeClass(alertClass)
+      .addClass("hide-alert");
+  }, 3000);
+}
+function resetRegisteredChamas(userStatus, chamas) {
+  //
+  var yourChamas = "";
+  if (userStatus) {
+    chamas.forEach(function (chama) {
+      yourChamas +=
+        '<li data-chamaId = "' +
+        chama.description.chamaId +
+        '">#' +
+        chama.description.chamaName +
+        "</li>";
+    });
+  } else {
+    yourChamas = "<li>#Yet to join a chama</li>";
+  }
+  $(".sidenav").find(".Your-chamas ul").empty().html(yourChamas);
+}
 var loadFile = function (event) {
   var image = document.getElementById("output");
 
