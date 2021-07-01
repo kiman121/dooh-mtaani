@@ -1,7 +1,6 @@
+const newUser = new User();
 $(document).ready(function () {
   var chamaId = 1;
-  resetNavBar();
-
   /*===== Form submissions======*/
   // 1) Add chama
   $("form#add-new-chama").submit(function (event) {
@@ -25,7 +24,6 @@ $(document).ready(function () {
       vision
     );
 
-    // add member ===
     var title = newUser.name.title,
       fullName =
         newUser.name.first +
@@ -51,33 +49,71 @@ $(document).ready(function () {
 
     newUser.chamas.push(newChama);
 
+    if (userStatus()) {
+      setChamaStatus(chamaId, chamaName);
+    }
     resetHtmlContent();
-    resetNavBar();
+    // resetNavBar(userStatus());
     navigate("settings");
+
     chamaId++;
-    console.log(newUser);
   });
   // 2) Add payment details
   $("form#add-payment-details").submit(function (event) {
     event.preventDefault();
     var selectedChamaID = $(".status-bar")
-        .find(".selected-chama")
-        .data(chamaid),
-      chamas = newUser.chamas;
-    (financialServiceProvider = $(".financial-service-provider").val()),
-      (accountNumber = $(".account-number").val()),
-      (chamaPaymentDetails = {
+        .find(".selected-chama-details")
+        .data("selectedchamaid"),
+      chamas = newUser.chamas,
+      financialServiceProvider = $(".financial-service-provider").val(),
+      accountNumber = $(".account-number").val(),
+      chamaPaymentDetails = {
         financialServiceProvider: financialServiceProvider,
         accountNumber: accountNumber,
-      });
+      };
 
     chamas.forEach(function (chama) {
-      if ((chama.chamaId = selectedChamaID)) {
-        chama.paymentDetails.push(chamaPaymentDetails);
+      if ((chama.description.chamaId = selectedChamaID)) {
+        chama.paymentDetails = chamaPaymentDetails;
       }
     });
 
+    resetHtmlContent();
     console.log(newUser);
+  });
+  // 3) Signup
+  $("form#signup").submit(function (event) {
+    event.preventDefault();
+    var fieldsToValidates = [
+      "title",
+      "firstname",
+      "lastname",
+      "middlename",
+      "gender",
+      "phonenumber",
+      "id-number",
+      "email",
+      "password",
+    ];
+    var result = validateUserInput(fieldsToValidates);
+
+    if (result) {
+      (newUser.name.title = $(".title").val()),
+        (newUser.name.first = $(".firstname").val()),
+        (newUser.name.last = $(".lastname").val()),
+        (newUser.name.middle = $(".middlename").val()),
+        (newUser.gender = $(".gender").val()),
+        (newUser.phoneNumber = $(".phonenumber").val()),
+        (newUser.email = $(".email").val()),
+        (newUser.nationalId = $(".id-number").val()),
+        (newUser.password = $(".password").val());
+    }
+
+    // Add login functionality
+    $(".landingpage").addClass("hide-div");
+    $(".main-content").removeClass("hide-div");
+
+    resetHtmlContent();
   });
   /*===== Other events ======*/
   $(".btn-nav").click(function (event) {
@@ -107,41 +143,33 @@ $(document).ready(function () {
     $("." + activeLink).addClass("hide-div");
     $("." + selectedLink).removeClass("hide-div");
   });
+  $(".btn-landingpage").click(function (event) {
+    event.preventDefault();
+    var divLink = $(this).data("link");
+    if (divLink === "sign-up") {
+      $(".sign-in").addClass("hide-div");
+    } else {
+      $(".sign-up").addClass("hide-div");
+    }
+    $("." + divLink).removeClass("hide-div");
+  });
 });
-var newUser = new User(
-  "Mr",
-  "male",
-  "John",
-  "Doe",
-  "Doe",
-  "0721000000",
-  "023189",
-  "john-doe@gmail.com"
-);
 
 /*==============
  CONSTRUCTORS
  ===============*/
-function User(
-  title,
-  gender,
-  firstName,
-  middleName,
-  lastName,
-  phoneNumber,
-  idNumber,
-  emailAddress
-) {
+function User() {
   this.name = {
-    title: title,
-    first: firstName,
-    middle: middleName,
-    last: lastName,
+    title: "",
+    first: "",
+    middle: "",
+    last: "",
   };
-  this.gender = gender;
-  this.phoneNumber = phoneNumber;
-  this.nationalId = idNumber;
-  this.email = emailAddress;
+  this.gender = "";
+  this.phoneNumber = "";
+  this.nationalId = "";
+  this.email = "";
+  this.password = "";
   this.chamas = [];
 }
 function Chama(
@@ -154,8 +182,12 @@ function Chama(
   type,
   vision
 ) {
-  this.chamaId = chamaId;
-  this.description = { chamaName: chamaName, type: type, vision: vision };
+  this.description = {
+    chamaId: chamaId,
+    chamaName: chamaName,
+    type: type,
+    vision: vision,
+  };
   this.address = { county: county, town: town };
   this.contributions = { frequency: frequency, amount: amount };
   this.members = [];
@@ -171,10 +203,26 @@ function Member(title, fullName, gender, phoneNumber, idNumber, emailAddress) {
   this.email = emailAddress;
 }
 /*==============
+ PROTOTYPES
+ ===============*/
+User.prototype.fullName = function () {
+  return (
+    newUser.name.first + " " + newUser.name.middle + " " + newUser.name.last
+  );
+};
+
+/*==============
  FUNCTIONS-OTHER
  ===============*/
-function resetNavBar() {
-  if (newUser.chamas.length === 0) {
+function userStatus() {
+  var exists = false;
+  if (newUser.chamas.length !== 0) {
+    exists = true;
+  }
+  return exists;
+}
+function resetNavBar(userStatus) {
+  if (!userStatus) {
     $(".settings-link, .contribute-link, .dashboard-link").addClass(
       "hide-link"
     );
@@ -195,9 +243,14 @@ function navigate(toLink) {
   $("." + toLink).removeClass("hide-div");
 }
 function resetHtmlContent() {
-  // Settings
-  // General settings
-  var chamas = newUser.chamas,
+  var selectedChamaID = $(".status-bar")
+      .find(".selected-chama-details")
+      .data("selectedchamaid"),
+    chamas = newUser.chamas,
+    title = newUser.name.title,
+    firstname = newUser.name.first,
+    fullName = newUser.fullName(),
+    phoneNumber = newUser.phoneNumber,
     chamaName = "",
     county = "",
     town = "",
@@ -208,17 +261,19 @@ function resetHtmlContent() {
     paymentDetails = {};
 
   chamas.forEach(function (chama) {
-    chamaName = chama.description.chamaName;
-    county = chama.address.county;
-    town = chama.address.town;
-    nature = chama.description.type;
-    vision = chama.description.vision;
-    frequency = chama.contributions.frequency;
-    amount = formatCurrency(parseInt(chama.contributions.amount));
-    paymentDetails = chama.paymentDetails;
+    if ((chama.description.chamaId = selectedChamaID)) {
+      chamaName = chama.description.chamaName;
+      county = chama.address.county;
+      town = chama.address.town;
+      nature = chama.description.type;
+      vision = chama.description.vision;
+      frequency = chama.contributions.frequency;
+      amount = formatCurrency(parseInt(chama.contributions.amount));
+      paymentDetails = chama.paymentDetails;
+    }
   });
-  // set chama name and id
-  
+  // Nav bar
+  resetNavBar(userStatus());
   // General settings
   resetGeneralSettings(
     chamaName,
@@ -231,13 +286,16 @@ function resetHtmlContent() {
   );
   // Payment details
   resetPaymentDetailsSettings(paymentDetails);
+  // Reset welcome message
+  resetWelcomeMessage(title, firstname, fullName);
+  // Reset contribute
+  resetContribute(fullName, phoneNumber, frequency, amount);
 }
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
 }
-
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
@@ -276,94 +334,130 @@ function resetGeneralSettings(
         amount +
         " ksh</span></li> </ul>"
     );
-<<<<<<< HEAD
-=======
-  //
-}
-
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
->>>>>>> 7e226e8586fcd453da5979132185ebc6120c9419
 }
 function resetPaymentDetailsSettings(paymentDetails) {
   if ($.isEmptyObject(paymentDetails)) {
     $(".sub-settings-content.info").addClass("hide-div");
     $(".sub-settings-content.form").removeClass("hide-div");
   } else {
-    $(".sub-settings-content .info").removeClass("hide-div");
-    $(".sub-settings-content .form").addClass("hide-div");
+    $(".sub-settings-content.info").removeClass("hide-div");
+    $(".sub-settings-content.form").addClass("hide-div");
+    $(".sub-settings-content.info")
+      .empty()
+      .html(
+        "<p>Make contributions to:</p> <p>Paybill#: <span>" +
+          paymentDetails.accountNumber +
+          '</span></p> <p>Account #: <span>"your phone number"</span></p>'
+      );
   }
 }
-function setChamaStatus(selectedChamaName, selectedChamaId){
-    $(".status-bar").find(".selected-chama").data("selectedChamaId");
+function setChamaStatus(chamaId, chamaName) {
+  $(".selected-chama-details").data({
+    selectedchamaid: chamaId,
+    selectedchamaname: chamaName,
+  });
 }
+function validateUserInput(fieldsToValidates) {
+  $(".validate").removeClass("validate");
+  var status = true;
 
-$(document).ready(function () {
-  $("#signup-btn").click(function () {
-    $("#signup").show();
-    $("#login").hide();
-  });
-  $("#login-btn").click(function () {
-    $("#login").show();
-    $("#signup").hide();
-  });
-  $("#submit-btn").click(function (event) {
-    event.preventDefault();
+  fieldsToValidates.forEach(function (fieldsToValidate) {
+    var field = fieldsToValidate,
+      thisField = $("." + field),
+      value = thisField.val();
 
-    var firstname = $("input#firstname").val();
-    var lastname = $("input#lastname").val();
-    var phonenumber = $("input#phonenumber").val();
-    var email = $("input#email").val();
-    var numberid = $("input#numid").val();
-    var username = $("input#username").val();
-    var password = $("input#newpass").val();
-    var pass = $("input#conpass").val();
-    console.log(
-      firstname,
-      lastname,
-      phonenumber,
-      email,
-      numberid,
-      username,
-      password,
-      pass
+    if (value === "") {
+      thisField.addClass("validate");
+      status = false;
+    }
+  });
+
+  return status;
+}
+function resetWelcomeMessage(title, first, fullName) {
+  $(".user-name").text(title + " " + fullName);
+  $(".current-user__name").text(first);
+}
+function resetContribute(fullName, phoneNumber, frequency, amount) {
+  $(".contribute__container")
+    .empty()
+    .html(
+      "<p>Member Name: <span>" +
+        fullName +
+        "</span></p> <p>Phone no: <span>" +
+        phoneNumber +
+        "</span></p> <p>Contribution cycle: <span>" +
+        frequency +
+        "</span></p> <p>Amount: <span>" +
+        amount +
+        '</span> ksh</p> <button type="button">Push to mpesa</button>'
     );
-    if (
-      firstname == "" ||
-      lastname == "" ||
-      phonenumber == "" ||
-      email == "" ||
-      numberid == "" ||
-      username == "" ||
-      password == "" ||
-      pass == ""
-    ) {
-      $("h5#errorfirstname").append(
-        " ERROR!!please complete filling in the form"
-      );
-    } else {
-      $("#maincontent").show();
-      $("#landingpage").hide();
-    }
-  });
-  $("#loginbtn").click(function (event) {
-    event.preventDefault();
-    var usnumber = $("input#usnum").val();
-    var pswd = $("input#pwd").val();
+}
+// $(document).ready(function () {
+//   $("#signup-btn").click(function () {
+//     $("#signup").show();
+//     $("#login").hide();
+//   });
+//   $("#login-btn").click(function () {
+//     $("#login").show();
+//     $("#signup").hide();
+//   });
+//   $("#submit-btn").click(function (event) {
+//     event.preventDefault();
 
-    console.log(usnumber, pswd);
+//     var firstname = $("input#firstname").val();
+//     var lastname = $("input#lastname").val();
+//     var phonenumber = $("input#phonenumber").val();
+//     var email = $("input#email").val();
+//     var numberid = $("input#numid").val();
+//     var username = $("input#username").val();
+//     var password = $("input#newpass").val();
+//     var pass = $("input#conpass").val();
+//     console.log(
+//       firstname,
+//       lastname,
+//       phonenumber,
+//       email,
+//       numberid,
+//       username,
+//       password,
+//       pass
+//     );
+//     if (
+//       firstname == "" ||
+//       lastname == "" ||
+//       phonenumber == "" ||
+//       email == "" ||
+//       numberid == "" ||
+//       username == "" ||
+//       password == "" ||
+//       pass == ""
+//     ) {
+//       $("h5#errorfirstname").append(
+//         " ERROR!!please complete filling in the form"
+//       );
+//     } else {
+//       $("#maincontent").show();
+//       $("#landingpage").hide();
+//     }
+//   });
+//   $("#loginbtn").click(function (event) {
+//     event.preventDefault();
+//     var usnumber = $("input#usnum").val();
+//     var pswd = $("input#pwd").val();
 
-    if (usnumber == "" || pswd == "") {
-      $("h5#errorfirstname").append(
-        " ERROR!!please complete filling in the form"
-      );
-    } else {
-      $("#maincontent").show();
-      $("#landingpage").hide();
-    }
-  });
-});
+//     console.log(usnumber, pswd);
+
+//     if (usnumber == "" || pswd == "") {
+//       $("h5#errorfirstname").append(
+//         " ERROR!!please complete filling in the form"
+//       );
+//     } else {
+//       $("#maincontent").show();
+//       $("#landingpage").hide();
+//     }
+//   });
+// });
 
 // var firstname =document.getElementById("firstname").value();
 // console.log(firstname)
