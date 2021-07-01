@@ -42,7 +42,7 @@ $(document).ready(function () {
         type,
         vision
       );
-        
+
       // console.log(userStatus());
       var title = newUser.name.title,
         fullName =

@@ -61,21 +61,18 @@ body {
   float: left;
   padding: 0.25em;
   color: #ffff;
-  border: 1px solid red;
 }
 .menu-bar {
   display: block;
   width: 100%;
-  margin: 1em 0;
+
   background-color: #bab2b5;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   /* border-radius: 4px; */
   padding: 0.5em;
 }
-.middle-section_content {
-  padding: 3.5em 0.75em;
-}
+
 .content {
   background-color: #f2f2f2;
   width: 100%;
