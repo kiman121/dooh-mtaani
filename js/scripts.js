@@ -1,5 +1,6 @@
 const newUser = new User(),
   newSystemUsers = new SystemUsers();
+   
 $(document).ready(function () {
   var chamaID = 1;
   /*===== Form submissions======*/
@@ -8,14 +9,14 @@ $(document).ready(function () {
     event.preventDefault();
 
     var fieldsToValidates = [
-        "county",
-        "town",
-        "contribution-frequency",
-        "contribution-amount",
-        "chama-name",
-        "chama-type",
-        "vision",
-      ],
+      "county",
+      "town",
+      "contribution-frequency",
+      "contribution-amount",
+      "chama-name",
+      "chama-type",
+      "vision",
+    ],
       result = validateUserInput(fieldsToValidates, "new-chama-form-alerts");
 
     if (result) {
@@ -32,7 +33,7 @@ $(document).ready(function () {
 
       console.log(chamaID);
 
-      const newChama = new Chama(
+      var newChama = new Chama(
         chamaID,
         county,
         town,
@@ -90,26 +91,28 @@ $(document).ready(function () {
   $("form#add-payment-details").submit(function (event) {
     event.preventDefault();
     var selectedChamaID = $(".status-bar")
-        .find(".selected-chama-details")
-        .data("selectedchamaid"),
+      .find(".selected-chama-details")
+      .data("selectedchamaid"),
       chamas = newUser.chamas,
+
       financialServiceProvider = $(".financial-service-provider").val(),
       accountNumber = $(".account-number").val(),
-      chamaPaymentDetails = {
-        financialServiceProvider: financialServiceProvider,
-        accountNumber: accountNumber,
-      };
+    
+    chamaPaymentDetails = {
+      financialServiceProvider: financialServiceProvider,
+      accountNumber: accountNumber,
+    };
     console.log(selectedChamaID);
     chamas.forEach(function (chama) {
       if ((chama.description.chamaId = selectedChamaID)) {
         chama.paymentDetails = chamaPaymentDetails;
       }
     });
-
-    resetHtmlContent();
+      validatePaymentDetails();
+    // resetHtmlContent();
     console.log(newUser);
   });
-  // 3) Signup
+ // 3) Signup
   $("form#signup").submit(function (event) {
     event.preventDefault();
     var fieldsToValidates = [
@@ -138,20 +141,37 @@ $(document).ready(function () {
       // Add login functionality
 
       newSystemUsers.users.push(sigupUser);
-
-      resetFormFields(fieldsToValidates);
+      $.ajax({
+			type: "POST",
+		url: "https://60e6fd3c15387c00173e49e5.mockapi.io/systemusers",
+			
+			data: sigupUser,
+			
+			success: function(res) {
+				console.log("success after user is register response" +"  "+JSON.stringify(res)); 
+        resetFormFields(fieldsToValidates);
       alertUser(
         "You have successfully signed up! Kindly proceed to the login.",
         "sign-up-form-alerts",
         "alert-success"
-      );
+      ); 
+      $(".sign-up").addClass("hide-div");   
+			},
+			error: function(res) {
+      alertUser("error singing up",
+      "sign-up-form-alerts",
+      "alert-danger");
+			}
+		});
+
+      
       // $(".sign-up-form-alerts").empty().html(;
       // $(".sign-up-form-alerts").removeClass("hide-alert").addClass("alert-success");
 
-      $(".sign-up").addClass("hide-div");
+      
       console.log(newSystemUsers);
       // resetHtmlContent();
-    }
+  }
   });
   // 4) Login
   $("form#login").submit(function (event) {
@@ -161,9 +181,11 @@ $(document).ready(function () {
       fieldsToValidates = ["user-eamil", "user-password"];
 
     var result = validateUserInput(fieldsToValidates, "sign-up-form-alerts");
-
+    
     if (result) {
+  
       var users = newSystemUsers.users;
+
       users.forEach(function (user) {
         if (user.email === userEmail && user.password === userPassword) {
           $(".landingpage").addClass("hide-div");
@@ -321,8 +343,8 @@ function navigate(toLink) {
 }
 function resetHtmlContent(selectedUserStatus = true, chamaId = "") {
   var selectedChamaID = $(".status-bar")
-      .find(".selected-chama-details")
-      .data("selectedchamaid"),
+    .find(".selected-chama-details")
+    .data("selectedchamaid"),
     chamas = newUser.chamas,
     title = newUser.name.title,
     firstname = newUser.name.first,
@@ -400,20 +422,20 @@ function resetGeneralSettings(
     .empty()
     .html(
       "<ul> <li>Name: <span>" +
-        chamaName +
-        "</span></li> <li>County: <span>" +
-        county +
-        "</span></li> <li>Town: <span>" +
-        town +
-        "</span></li> <li>Nature: <span>" +
-        nature +
-        "</span></li> <li>Vision: <span>" +
-        vision +
-        "</span></li> <li>Contribution frequency: <span>" +
-        frequency +
-        "</span></li> <li>Amount: <span>" +
-        amount +
-        " ksh</span></li> </ul>"
+      chamaName +
+      "</span></li> <li>County: <span>" +
+      county +
+      "</span></li> <li>Town: <span>" +
+      town +
+      "</span></li> <li>Nature: <span>" +
+      nature +
+      "</span></li> <li>Vision: <span>" +
+      vision +
+      "</span></li> <li>Contribution frequency: <span>" +
+      frequency +
+      "</span></li> <li>Amount: <span>" +
+      amount +
+      " ksh</span></li> </ul>"
     );
 }
 function resetPaymentDetailsSettings(paymentDetails) {
@@ -427,8 +449,8 @@ function resetPaymentDetailsSettings(paymentDetails) {
       .empty()
       .html(
         "<p>Make contributions to:</p> <p>Paybill#: <span>" +
-          paymentDetails.accountNumber +
-          '</span></p> <p>Account #: <span>"your phone number"</span></p>'
+        paymentDetails.accountNumber +
+        '</span></p> <p>Account #: <span>"your phone number"</span></p>'
       );
   }
 }
@@ -467,14 +489,14 @@ function resetContribute(fullName, phoneNumber, frequency, amount) {
     .empty()
     .html(
       "<p>Member Name: <span>" +
-        fullName +
-        "</span></p> <p>Phone no: <span>" +
-        phoneNumber +
-        "</span></p> <p>Contribution cycle: <span>" +
-        frequency +
-        "</span></p> <p>Amount: <span>" +
-        amount +
-        '</span> ksh</p> <button type="button">Push to mpesa</button>'
+      fullName +
+      "</span></p> <p>Phone no: <span>" +
+      phoneNumber +
+      "</span></p> <p>Contribution cycle: <span>" +
+      frequency +
+      "</span></p> <p>Amount: <span>" +
+      amount +
+      '</span> ksh</p> <button type="button">Push to mpesa</button>'
     );
 }
 function resetFormFields(fieldsToValidates) {
@@ -517,3 +539,29 @@ var loadFile = function (event) {
 
   image.src = URL.createObjectURL(event.target.files[0]);
 };
+function validatePaymentDetails(electedChamaID){
+  var chamaPaymentDetails = [ financialServiceProvider = $(".financial-service-provider").val(),
+      accountNumber = $(".account-number").val(),]
+  if(chamaPaymentDetails == ""){
+alertUser("sign-up-form-alerts")
+
+  }else{
+resetHtmlContent();
+  }
+}
+function getsystemusers(callback){
+    $.get("https://60e6fd3c15387c00173e49e5.mockapi.io/systemusers", function(registeredUsers){
+      // return registeredUsers() ;
+      var registeredUser = registeredUsers
+      for (let val in registeredUser){
+        var systemusers = registeredUser[val]
+        
+        console.log(systemusers)
+      }
+      
+     
+     });
+    }
+    getsystemusers()
+    
+    
